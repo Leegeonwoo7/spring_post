@@ -1,4 +1,4 @@
-package com.post.domain.embeded;
+package com.post.domain.member;
 
 import jakarta.persistence.Embeddable;
 

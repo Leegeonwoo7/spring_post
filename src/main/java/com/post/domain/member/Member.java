@@ -1,9 +1,11 @@
-package com.post.domain;
+package com.post.domain.member;
 
-import com.post.domain.embeded.Address;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
+import static jakarta.persistence.EnumType.*;
 import static jakarta.persistence.GenerationType.*;
 
 @Entity
@@ -25,4 +27,11 @@ public class Member {
 
     @Embedded
     private Address address;
+    private LocalDateTime birth;
+
+    @Column(length = 15)
+    private String phone;
+
+    @Enumerated(STRING)
+    private Role role;
 }
