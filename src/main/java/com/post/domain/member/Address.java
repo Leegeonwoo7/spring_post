@@ -7,9 +7,9 @@ public class Address {
 
     /**
      * ex
-     * 서울시 강남구
+     * 서울시 강남구 역삼동
      * 테헤란로
-     *
+     * 113 XXX
      */
     private String city;
     private String street;

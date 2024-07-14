@@ -22,16 +22,19 @@ public class Member {
 //    @Column(nullable = false, length = 15)
     private String password;
 
+//    @Column(length = 10)
     private String name;
     private String email;
 
     @Embedded
     private Address address;
-    private LocalDateTime birth;
+    private LocalDateTime birthdate;
 
-    @Column(length = 15)
+//    @Column(length = 15)
     private String phone;
 
     @Enumerated(STRING)
     private Role role;
+
+    private LocalDateTime createAt;
 }
