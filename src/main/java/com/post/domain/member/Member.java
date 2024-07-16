@@ -53,4 +53,8 @@ public class Member {
         this.role = role;
         this.createAt = createAt;
     }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }
