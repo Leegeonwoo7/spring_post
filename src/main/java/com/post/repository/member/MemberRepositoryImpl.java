@@ -2,7 +2,6 @@ package com.post.repository.member;
 
 import com.post.domain.member.Member;
 import com.post.exception.NotFoundMemberException;
-import com.post.exception.ParameterException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +45,7 @@ public class MemberRepositoryImpl implements MemberRepository{
 
     @Override
     public void delete(Long id) {
-
+        Member findMember = em.find(Member.class, id);
+        em.remove(findMember);
     }
 }
