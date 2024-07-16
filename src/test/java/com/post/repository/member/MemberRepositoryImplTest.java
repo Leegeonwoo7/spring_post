@@ -122,6 +122,34 @@ class MemberRepositoryImplTest {
                 .isInstanceOf(NotFoundMemberException.class);
     }
 
+    @Test
+    @DisplayName("중복되는 이메일로 회원가입시 TRUE를 반환한다")
+    void isExistEmail() {
+        // given
+        Member member = createMember();
+        memberRepository.save(member);
+
+        //when
+        boolean result = memberRepository.isExistEmail("john.doe@example.com");
+
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("중복되는 아이디로 회원가입시 TRUE를 반환한다")
+    void isExistLoginId() {
+        // given
+        Member member = createMember();
+        memberRepository.save(member);
+
+        //when
+        boolean result = memberRepository.isExistLoginId("user1");
+
+        //then
+        assertThat(result).isTrue();
+    }
+
     private Member createMember() {
         return Member.builder()
                 .loginId("user1")
@@ -135,20 +163,24 @@ class MemberRepositoryImplTest {
                 .createAt(LocalDateTime.now())
                 .build();
     }
+
+//    private Member createDuplicateEmailMember() {
+//        return Member.builder()
+//                .loginId("user2")
+//                .password("password2")
+//                .name("Jane Doe")
+//                .email("jane.doe@example.com")
+//                .address(new Address("B city", "B street", "B zipcode"))
+//                .birthdate(LocalDateTime.of(1985, 5, 15, 0, 0))
+//                .phone("010-9876-5432")
+//                .role(ADMIN)
+//                .createAt(LocalDateTime.now())
+//                .build();
+//    }
 }
 
-//Member member2 = Member.builder()
-//        .loginId("user2")
-//        .password("password2")
-//        .name("Jane Doe")
-//        .email("jane.doe@example.com")
-//        .address(new Address("B city", "B street", "B zipcode"))
-//        .birthdate(LocalDateTime.of(1985, 5, 15, 0, 0))
-//        .phone("010-9876-5432")
-//        .role(ADMIN)
-//        .createAt(LocalDateTime.now())
-//        .build();
-//
+
+
 //Member member3 = Member.builder()
 //        .loginId("user3")
 //        .password("password3")
