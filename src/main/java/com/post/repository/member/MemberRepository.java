@@ -19,11 +19,6 @@ public interface MemberRepository {
 
     Member findById(Long id);
     Member findByName(String name);
-
-    Member updatePassword(Long id, String newPassword);
-    Member updateInfo(Long id, Member member);
-    Member updateName(Long id, String newName);
-
     void delete(Long id);
 
 }

@@ -45,32 +45,6 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
-    public Member updatePassword(Long id, String newPassword) {
-        Member findMember = em.find(Member.class, id);
-        if (findMember == null) {
-            throw new NotFoundMemberException("비밀번호를 변경하기위한 회원을 찾지 못하였습니다.");
-        }
-
-        findMember.changePassword(newPassword);
-        return findMember;
-    }
-
-    @Override
-    public Member updateInfo(Long id, Member member) {
-        Member findMember = em.find(Member.class, id);
-        if (findMember == null) {
-            throw new NotFoundMemberException("회원정보 변경하기위한 회원을 찾지 못하였습니다.");
-        }
-
-        return null;
-    }
-
-    @Override
-    public Member updateName(Long id, String newName) {
-        return null;
-    }
-
-    @Override
     public void delete(Long id) {
 
     }
