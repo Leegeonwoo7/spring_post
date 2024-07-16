@@ -19,6 +19,11 @@ public interface MemberRepository {
 
     Member findById(Long id);
     Member findByName(String name);
+
+    boolean isExistEmail(String email);
+
+    boolean isExistLoginId(String loginId);
+
     void delete(Long id);
 
 }
