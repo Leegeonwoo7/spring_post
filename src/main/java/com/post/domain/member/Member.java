@@ -25,7 +25,7 @@ public class Member {
     @Column(nullable = false, length = 15)
     private String password;
 
-    @Column(length = 10)
+    @Column(length = 10, unique = true)
     private String name;
     private String email;
 
@@ -54,6 +54,10 @@ public class Member {
         this.createAt = createAt;
     }
 
+
+    public void changeName(String name) {
+        this.name = name;
+    }
     public void changePassword(String newPassword) {
         this.password = newPassword;
     }
