@@ -24,6 +24,8 @@ public interface MemberRepository {
 
     boolean isExistLoginId(String loginId);
 
+    boolean isDuplicateName(String name);
+
     void delete(Long id);
 
 }

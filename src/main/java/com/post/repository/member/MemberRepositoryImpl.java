@@ -67,6 +67,16 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
+    public boolean isDuplicateName(String name) {
+        String jpql = "select m from Member m where m.name = :name or m.loginId = :name";
+        List<Member> result = em.createQuery(jpql, Member.class)
+                .setParameter("name", name)
+                .getResultList();
+
+        return !result.isEmpty();
+    }
+
+    @Override
     public void delete(Long id) {
         Member findMember = em.find(Member.class, id);
         em.remove(findMember);
