@@ -6,10 +6,13 @@ import com.post.domain.member.Role;
 import com.post.exception.NotFoundMemberException;
 import com.post.exception.ParameterException;
 import jakarta.persistence.EntityManager;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MemberRepositoryImplTest {
 
     @Autowired
@@ -68,8 +72,7 @@ class MemberRepositoryImplTest {
 
         //then
         assertThat(saveMember.getId()).isEqualTo(member.getId());
-        assertThatThrownBy(() -> memberRepository.findById(findId))
-                .isInstanceOf(NotFoundMemberException.class);
+        assertThatThrownBy(() -> memberRepository.findById(findId)).isInstanceOf(NotFoundMemberException.class);
     }
 
     @Test
@@ -100,8 +103,7 @@ class MemberRepositoryImplTest {
         //then
         assertThat(findMember.getName()).isEqualTo(saveMember.getName());
 
-        assertThatThrownBy(() -> memberRepository.findByName(noMemberName))
-                .isInstanceOf(EmptyResultDataAccessException.class);
+        assertThatThrownBy(() -> memberRepository.findByName(noMemberName)).isInstanceOf(EmptyResultDataAccessException.class);
     }
 
     @Test
@@ -118,8 +120,7 @@ class MemberRepositoryImplTest {
         memberRepository.delete(saveMember.getId());
 
         //then
-        assertThatThrownBy(() -> memberRepository.findById(saveMember.getId()))
-                .isInstanceOf(NotFoundMemberException.class);
+        assertThatThrownBy(() -> memberRepository.findById(saveMember.getId())).isInstanceOf(NotFoundMemberException.class);
     }
 
     @Test
@@ -150,6 +151,50 @@ class MemberRepositoryImplTest {
         assertThat(result).isTrue();
     }
 
+    @Test
+    @DisplayName("중복되는 name 또는 loginId로 조회시 TRUE를 반환한다")
+    void isDuplicateName() {
+        // given
+        Member member = Member.builder()
+                .loginId("memberA")
+                .password("1234")
+                .name("멤버A")
+                .build();
+        memberRepository.save(member);
+
+        //name 중복
+        Member duplicateNameMember = Member.builder()
+                .loginId("memberB")
+                .password("4321")
+                .name("멤버A")
+                .build();
+
+        //loginId 중복
+        Member duplicateLoginIdMember = Member.builder()
+                .loginId("memberA")
+                .password("5432")
+                .name("멤버C")
+                .build();
+
+        //loginId - name 중복
+        Member duplicateNameLoginId = Member.builder()
+                .loginId("memberC")
+                .password("3214")
+                .name("memberA")
+                .build();
+
+        //when
+        boolean duplicateName = memberRepository.isDuplicateName(duplicateNameMember.getName());
+
+        boolean duplicateLoginId = memberRepository.isDuplicateName(duplicateLoginIdMember.getLoginId());
+
+        boolean duplicateIdName = memberRepository.isDuplicateName(duplicateNameLoginId.getName());
+        //then
+        assertThat(duplicateName).isTrue();
+        assertThat(duplicateLoginId).isTrue();
+        assertThat(duplicateIdName).isTrue();
+    }
+
     private Member createMember() {
         return Member.builder()
                 .loginId("user1")
@@ -163,33 +208,4 @@ class MemberRepositoryImplTest {
                 .createAt(LocalDateTime.now())
                 .build();
     }
-
-//    private Member createDuplicateEmailMember() {
-//        return Member.builder()
-//                .loginId("user2")
-//                .password("password2")
-//                .name("Jane Doe")
-//                .email("jane.doe@example.com")
-//                .address(new Address("B city", "B street", "B zipcode"))
-//                .birthdate(LocalDateTime.of(1985, 5, 15, 0, 0))
-//                .phone("010-9876-5432")
-//                .role(ADMIN)
-//                .createAt(LocalDateTime.now())
-//                .build();
-//    }
 }
-
-
-
-//Member member3 = Member.builder()
-//        .loginId("user3")
-//        .password("password3")
-//        .name("Jim Beam")
-//        .email("jim.beam@example.com")
-//        .address(new Address("C city", "C street", "C zipcode"))
-//        .birthdate(LocalDateTime.of(1995, 12, 31, 0, 0))
-//        .phone("010-4567-8901")
-//        .role(USER)
-//        .createAt(LocalDateTime.now())
-//        .build();
-
