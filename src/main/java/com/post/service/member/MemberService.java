@@ -3,6 +3,7 @@ package com.post.service.member;
 import com.post.domain.member.Member;
 import com.post.exception.ExistMemberEmailException;
 import com.post.exception.ExistMemberLoginIdException;
+import com.post.exception.ExistMemberNameException;
 import com.post.exception.ParameterException;
 import com.post.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,31 @@ public class MemberService {
 
         validateParamMember(member);
 
+        if (member.getName() == null) {
+            member.changeName(member.getLoginId());
+        }
+
         log.info("[회원가입 정보] loginId: {}", member);
         return memberRepository.save(member);
+    }
+
+    @Transactional(readOnly = true)
+    public Member findMemberById(Long id) {
+        return memberRepository.findById(id);
+    }
+
+    public Member changePassword(Long id, String newPassword) {
+        Member member = memberRepository.findById(id);
+
+        member.changePassword(newPassword);
+        return member;
+    }
+
+    public Member changeName(Long id, String newName) {
+        Member member = memberRepository.findById(id);
+
+        member.changeName(newName);
+        return member;
     }
 
     private void validateParamMember(Member member) {
@@ -38,5 +62,10 @@ public class MemberService {
         if (existLoginId) {
             throw new ExistMemberLoginIdException("이미 존재하는 로그인아이디로 회원가입을 요청하였습니다.");
         }
+        boolean duplicateName = memberRepository.isDuplicateName(member.getName());
+        if (duplicateName) {
+            throw new ExistMemberNameException("이미 존재하는 이름으로 회원가입을 요청하였습니다.");
+        }
     }
+
 }
