@@ -1,4 +1,4 @@
-package com.post.service;
+package com.post.service.member;
 
 import com.post.domain.member.Member;
 import com.post.exception.ExistMemberEmailException;
