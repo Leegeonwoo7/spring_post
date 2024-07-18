@@ -16,6 +16,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.post.domain.member.Role.*;
@@ -202,7 +203,7 @@ class MemberRepositoryImplTest {
                 .name("John Doe")
                 .email("john.doe@example.com")
                 .address(new Address("A city", "A street", "A zipcode"))
-                .birthdate(LocalDateTime.of(1990, 1, 1, 0, 0))
+                .birthdate(LocalDate.of(1990, 1, 1))
                 .phone("010-1234-5678")
                 .role(USER)
                 .createAt(LocalDateTime.now())
