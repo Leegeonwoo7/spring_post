@@ -1,5 +1,7 @@
 package com.post.service.member;
 
+import com.post.api.member.request.MemberCreateRequest;
+import com.post.api.member.response.MemberResponse;
 import com.post.domain.member.Address;
 import com.post.domain.member.Member;
 import com.post.exception.ExistMemberEmailException;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.post.domain.member.Role.ADMIN;
@@ -35,10 +38,10 @@ class MemberServiceTest {
     @Transactional
     void join() {
         // given
-        Member member = createMember();
+        MemberCreateRequest member = createMember();
 
         //when
-        Member joinMember = memberService.join(member);
+        MemberResponse joinMember = memberService.join(member);
 
         //then
         assertThat(joinMember).isNotNull();
@@ -51,11 +54,11 @@ class MemberServiceTest {
     @Transactional
     void duplicateEmailJoinMember() {
         // given
-        Member member = createMember();
+        MemberCreateRequest member = createMember();
         memberService.join(member);
 
         //when
-        Member duplicateMember = createDuplicateEmailMember();
+        MemberCreateRequest duplicateMember = createDuplicateEmailMember();
 
         //then
         assertThatThrownBy(() -> memberService.join(duplicateMember))
@@ -68,14 +71,14 @@ class MemberServiceTest {
     @Transactional
     void duplicateLoginIdJoinMember() {
         // given
-        Member memberA = Member.builder()
+        MemberCreateRequest memberA = MemberCreateRequest.builder()
                 .loginId("memberA")
                 .password("1234")
                 .name("멤버A")
                 .build();
         memberService.join(memberA);
 
-        Member memberB = Member.builder()
+        MemberCreateRequest memberB = MemberCreateRequest.builder()
                 .loginId("memberA")
                 .password("4567")
                 .name("멤버B")
@@ -96,14 +99,14 @@ class MemberServiceTest {
     @Transactional
     void nameNullJoin() {
         // given
-        Member memberA = Member.builder()
+        MemberCreateRequest memberA = MemberCreateRequest.builder()
                 .password("1234")
                 .loginId("memberA")
                 .build();
 
         //when
-        Member joinMember = memberService.join(memberA);
-        Member findMember = memberService.findMemberById(joinMember.getId());
+        MemberResponse joinMember = memberService.join(memberA);
+        MemberResponse findMember = memberService.findMemberById(joinMember.getId());
 
         //then
         assertThat(findMember.getName()).isEqualTo("memberA");
@@ -115,13 +118,13 @@ class MemberServiceTest {
     @Transactional
     void duplicateLoginIdNameJoin() {
         // given
-        Member member = Member.builder()
+        MemberCreateRequest member = MemberCreateRequest.builder()
                 .password("1234")
                 .loginId("memberA")
                 .name("회원A")
                 .build();
 
-        Member duplicateMember = Member.builder()
+        MemberCreateRequest duplicateMember = MemberCreateRequest.builder()
                 .password("5678")
                 .loginId("memberB")
                 .name("memberA")
@@ -142,82 +145,82 @@ class MemberServiceTest {
     @Transactional
     void findMemberById() {
         // given
-        Member memberA = Member.builder()
+        MemberCreateRequest memberA = MemberCreateRequest.builder()
                 .loginId("memberA")
                 .password("1234")
                 .build();
-        Member joinMember = memberService.join(memberA);
+        MemberResponse joinMember = memberService.join(memberA);
 
         //when
-        Member memberById = memberService.findMemberById(joinMember.getId());
+        MemberResponse memberById = memberService.findMemberById(joinMember.getId());
 
         //then
         assertThat(joinMember).isEqualTo(memberById);
     }
 
     @Test
-    @DisplayName("비밀번호를 입력된 값으로 변경한다")
-    @Order(6)
-    @Transactional
-    void changePassword() {
-        // given
-        Member member = createMember();
-        Member saveMember = memberService.join(member);
-
-        String newPassword = "newPassword";
-
-        //when
-        memberService.changePassword(saveMember.getId(), newPassword);
-        Member updateMember = memberService.findMemberById(saveMember.getId());
-
-        //then
-        assertThat(updateMember.getPassword()).isEqualTo(newPassword);
-    }
-
-    @Test
     @DisplayName("회원이름을 입력된 값으로 변경한다")
-    @Order(7)
+    @Order(6)
     @Transactional
     void changeName() {
         // given
-        Member memberA = Member.builder()
+        MemberCreateRequest memberA = MemberCreateRequest.builder()
                 .loginId("memberA")
                 .password("1234")
                 .build();
-        Member joinMember = memberService.join(memberA);
+        MemberResponse joinMember = memberService.join(memberA);
 
         String newName = "newName";
 
         //when
         memberService.changeName(joinMember.getId(), newName);
-        Member updateMember = memberService.findMemberById(joinMember.getId());
+        MemberResponse updateMember = memberService.findMemberById(joinMember.getId());
 
         //then
         assertThat(updateMember.getName()).isEqualTo(newName);
     }
 
-    private Member createMember() {
-        return Member.builder()
+// 비밀번호 변경은 시큐리티 적용 필요성이 있기때문에 킵
+//    @Test
+//    @DisplayName("비밀번호를 입력된 값으로 변경한다")
+//    @Order(6)
+//    @Transactional
+//    void changePassword() {
+//        // given
+//        MemberCreateRequest member = createMember();
+//        MemberResponse saveMember = memberService.join(member);
+//
+//        String newPassword = "newPassword";
+//
+//        //when
+//        memberService.changePassword(saveMember.getId(), newPassword);
+//        MemberResponse updateMember = memberService.findMemberById(saveMember.getId());
+//
+//        //then
+//        assertThat(updateMember.getPassword()).isEqualTo(newPassword);
+//    }
+    private MemberCreateRequest createMember() {
+        return MemberCreateRequest.builder()
                 .loginId("user1")
                 .password("password1")
                 .name("John Doe")
                 .email("john.doe@example.com")
                 .address(new Address("A city", "A street", "A zipcode"))
-                .birthdate(LocalDateTime.of(1990, 1, 1, 0, 0))
+                .birthdate(LocalDate.of(1990, 1, 1))
                 .phone("010-1234-5678")
                 .role(USER)
                 .createAt(LocalDateTime.now())
                 .build();
     }
 
-    private Member createDuplicateEmailMember() {
-        return Member.builder()
+    private MemberCreateRequest createDuplicateEmailMember() {
+        return MemberCreateRequest.builder()
                 .loginId("user2")
                 .password("password2")
                 .name("Jane Doe")
                 .email("john.doe@example.com")
                 .address(new Address("B city", "B street", "B zipcode"))
-                .birthdate(LocalDateTime.of(1985, 5, 15, 0, 0))
+                .birthdate(LocalDate.of(1985, 5, 15))
                 .phone("010-9876-5432")
                 .role(ADMIN)
                 .createAt(LocalDateTime.now())
