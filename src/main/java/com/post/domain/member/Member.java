@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static jakarta.persistence.EnumType.*;
@@ -31,7 +32,7 @@ public class Member {
 
     @Embedded
     private Address address;
-    private LocalDateTime birthdate;
+    private LocalDate birthdate;
 
     @Column(length = 15)
     private String phone;
@@ -42,7 +43,7 @@ public class Member {
     private LocalDateTime createAt;
 
     @Builder
-    public Member(String loginId, String password, String name, String email, Address address, LocalDateTime birthdate, String phone, Role role, LocalDateTime createAt) {
+    public Member(String loginId, String password, String name, String email, Address address, LocalDate birthdate, String phone, Role role, LocalDateTime createAt) {
         this.loginId = loginId;
         this.password = password;
         this.name = name;
