@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.post.domain.member.Role.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,6 +60,39 @@ class MemberRepositoryImplTest {
 
         //then
         assertThat(saveMember).isEqualTo(findMember);
+    }
+
+    @Test
+    @DisplayName("저장된 회원이 3명일 경우 List의 size는 3이어야한다.")
+    void findMemberList() {
+        // given
+        Member memberA = Member.builder()
+                .loginId("memberA")
+                .password("1234")
+                .email("memberA@example.com")
+                .build();
+
+        Member memberB = Member.builder()
+                .loginId("memberB")
+                .password("1234")
+                .email("memberB@example.com")
+                .build();
+
+        Member memberC = Member.builder()
+                .loginId("memberC")
+                .password("1234")
+                .email("memberC@example.com")
+                .build();
+
+        memberRepository.save(memberA);
+        memberRepository.save(memberB);
+        memberRepository.save(memberC);
+
+        //when
+        List<Member> memberList = memberRepository.findMemberList();
+
+        //then
+        assertThat(memberList).hasSize(3);
     }
 
     @Test
