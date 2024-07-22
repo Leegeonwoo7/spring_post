@@ -20,7 +20,7 @@ public class MemberResponse {
     private String name;
     private String email;
     private Address address;
-    private LocalDate birth;
+    private LocalDate birthdate;
     private String phone;
     private Role role;
     private LocalDateTime createAt;
@@ -52,13 +52,13 @@ public class MemberResponse {
                 Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getEmail(), that.getEmail()) &&
                 Objects.equals(getAddress(), that.getAddress()) &&
-                Objects.equals(getBirth(), that.getBirth()) &&
+                Objects.equals(getBirthdate(), that.getBirthdate()) &&
                 Objects.equals(getPhone(), that.getPhone()) && getRole() == that.getRole() &&
                 Objects.equals(getCreateAt(), that.getCreateAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLoginId(), getName(), getEmail(), getAddress(), getBirth(), getPhone(), getRole(), getCreateAt());
+        return Objects.hash(getId(), getLoginId(), getName(), getEmail(), getAddress(), getBirthdate(), getPhone(), getRole(), getCreateAt());
     }
 }
