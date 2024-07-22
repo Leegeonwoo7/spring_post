@@ -1,10 +1,13 @@
 package com.post.domain.member;
 
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Embeddable
 @NoArgsConstructor
+@Getter
 public class Address {
 
     /**

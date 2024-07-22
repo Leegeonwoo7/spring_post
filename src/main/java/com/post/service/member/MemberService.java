@@ -27,7 +27,6 @@ public class MemberService {
         }
 
         validateParamMember(requestMember);
-
         Member member = Member.builder()
                 .loginId(requestMember.getLoginId())
                 .password(requestMember.getPassword())

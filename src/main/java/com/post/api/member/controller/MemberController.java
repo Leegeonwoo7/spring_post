@@ -19,6 +19,7 @@ public class MemberController {
 
     @PostMapping("/members/add")
     public ResponseEntity<MemberResponse> createAccount(@RequestBody MemberCreateRequest request) {
+        log.info("MemberCreateRequest.Address = {}", request.getAddress());
         MemberResponse response = memberService.join(request);
         return ResponseEntity.ok(response);
     }
