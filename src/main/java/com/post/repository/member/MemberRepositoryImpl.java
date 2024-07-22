@@ -24,6 +24,13 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
+    public List<Member> findMemberList() {
+        String jpql = "select m from Member m";
+        return em.createQuery(jpql, Member.class)
+                .getResultList();
+    }
+
+    @Override
     public Member findById(Long id) {
         Member findMember = em.find(Member.class, id);
         if (findMember == null) {

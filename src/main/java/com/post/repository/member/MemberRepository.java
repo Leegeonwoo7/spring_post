@@ -2,6 +2,8 @@ package com.post.repository.member;
 
 import com.post.domain.member.Member;
 
+import java.util.List;
+
 /**
  * 1. 저장
  * 2. 조회
@@ -19,6 +21,7 @@ public interface MemberRepository {
 
     Member findById(Long id);
     Member findByName(String name);
+    List<Member> findMemberList();
 
     boolean isExistEmail(String email);
 
