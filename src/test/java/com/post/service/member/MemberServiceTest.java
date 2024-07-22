@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.post.domain.member.Role.ADMIN;
 import static com.post.domain.member.Role.USER;
@@ -178,6 +179,37 @@ class MemberServiceTest {
 
         //then
         assertThat(updateMember.getName()).isEqualTo(newName);
+    }
+
+    @Test
+    @DisplayName("모든회원을 조회한 Member엔티티는 MemberResponse로 변환되어야한다.")
+    @Order(7)
+    void findMemberList() {
+        // given
+        MemberCreateRequest memberA = MemberCreateRequest.builder()
+                .loginId("memberA")
+                .password("1234")
+                .build();
+
+        MemberCreateRequest memberB = MemberCreateRequest.builder()
+                .loginId("memberB")
+                .password("1234")
+                .build();
+
+        MemberCreateRequest memberC = MemberCreateRequest.builder()
+                .loginId("memberC")
+                .password("1234")
+                .build();
+        memberService.join(memberA);
+        memberService.join(memberB);
+        memberService.join(memberC);
+
+        //when
+        List<MemberResponse> memberList = memberService.findMemberList();
+
+        //then
+        memberList.forEach(memberResponse -> assertThat(memberResponse).isInstanceOf(MemberResponse.class));
+        assertThat(memberList).hasSize(3);
     }
 
 // 비밀번호 변경은 시큐리티 적용 필요성이 있기때문에 킵
