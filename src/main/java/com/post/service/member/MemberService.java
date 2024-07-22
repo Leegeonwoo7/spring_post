@@ -13,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -46,6 +49,14 @@ public class MemberService {
 
         log.info("[회원가입 정보] loginId: {}", member);
         return MemberResponse.from(member);
+    }
+
+    @Transactional(readOnly = true)
+    public List<MemberResponse> findMemberList() {
+        List<Member> memberList = memberRepository.findMemberList();
+        return memberList.stream()
+                .map(MemberResponse::from)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
