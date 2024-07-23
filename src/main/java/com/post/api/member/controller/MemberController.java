@@ -41,4 +41,10 @@ public class MemberController {
         MemberResponse memberResponse = memberService.changePassword(memberId, request.getPassword());
         return ResponseEntity.ok(memberResponse);
     }
+
+    @PostMapping("/members/delete/{memberId}")
+    public ResponseEntity<Void> deleteMember(@PathVariable Long memberId) {
+        memberService.deleteMember(memberId);
+        return ResponseEntity.ok().build();
+    }
 }
