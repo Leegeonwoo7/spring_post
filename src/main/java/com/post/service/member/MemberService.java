@@ -80,6 +80,10 @@ public class MemberService {
         return MemberResponse.from(findMember);
     }
 
+    public void deleteMember(Long id) {
+        memberRepository.delete(id);
+    }
+
     private void validateParamMember(MemberCreateRequest member) {
         boolean existEmail = memberRepository.isExistEmail(member.getEmail());
         if (existEmail) {
