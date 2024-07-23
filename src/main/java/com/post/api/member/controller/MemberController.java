@@ -1,15 +1,13 @@
 package com.post.api.member.controller;
 
+import com.post.api.member.request.ChangePasswordRequest;
 import com.post.api.member.request.MemberCreateRequest;
 import com.post.api.member.response.MemberResponse;
 import com.post.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,13 +20,25 @@ public class MemberController {
 
     @PostMapping("/members/add")
     public ResponseEntity<MemberResponse> createAccount(@RequestBody MemberCreateRequest request) {
-        MemberResponse response = memberService.join(request);
-        return ResponseEntity.ok(response);
+        MemberResponse memberResponse = memberService.join(request);
+        return ResponseEntity.ok(memberResponse);
     }
 
     @GetMapping("/members")
     public ResponseEntity<List<MemberResponse>> findMembers() {
-        List<MemberResponse> response = memberService.findMemberList();
-        return ResponseEntity.ok(response);
+        List<MemberResponse> memberResponse = memberService.findMemberList();
+        return ResponseEntity.ok(memberResponse);
+    }
+
+    @GetMapping("/members/{memberId}")
+    public ResponseEntity<MemberResponse> findMember(@PathVariable Long memberId) {
+        MemberResponse memberResponse = memberService.findMemberById(memberId);
+        return ResponseEntity.ok(memberResponse);
+    }
+
+    @PostMapping("/members/edit/{memberId}")
+    public ResponseEntity<MemberResponse> editMember(@PathVariable Long memberId, @RequestBody ChangePasswordRequest request) {
+        MemberResponse memberResponse = memberService.changePassword(memberId, request.getPassword());
+        return ResponseEntity.ok(memberResponse);
     }
 }
