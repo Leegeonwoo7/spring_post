@@ -2,12 +2,15 @@ package com.post.domain.board;
 
 import com.post.domain.member.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.GenerationType.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Board {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -23,4 +26,15 @@ public class Board {
 
     @ManyToOne
     private Member member;
+
+    @Builder
+    public Board(String title, String content, Member member) {
+        this.title = title;
+        this.content = content;
+        this.member = member;
+    }
+
+    public void assignMember(Member member){
+        this.member = member;
+    }
 }
