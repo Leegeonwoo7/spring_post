@@ -14,3 +14,13 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
+
+#MyBatis
+mybatis:
+  type-aliases-package: com.post.domain
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.com.post.repository.mybatis: trace
