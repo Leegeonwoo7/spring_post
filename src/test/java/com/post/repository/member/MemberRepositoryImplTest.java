@@ -92,10 +92,6 @@ class MemberRepositoryImplTest {
 
         //when
         List<Member> memberList = memberRepository.findMemberList();
-        for (Member member : memberList) {
-            System.out.println(member.getName());
-
-        }
 
         //then
         assertThat(memberList).hasSize(3);
