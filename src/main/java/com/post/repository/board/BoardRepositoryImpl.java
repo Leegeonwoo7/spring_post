@@ -3,6 +3,7 @@ package com.post.repository.board;
 import com.post.api.board.request.SearchCond;
 import com.post.domain.board.Board;
 import com.post.domain.member.Member;
+import com.post.repository.mybatis.BoardMapper;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ import java.util.List;
 public class BoardRepositoryImpl implements BoardRepository{
 
     private final EntityManager em;
+    private final BoardMapper boardMapper;
 
     @Override
     public Board save(Board board) {
@@ -28,8 +30,6 @@ public class BoardRepositoryImpl implements BoardRepository{
 
     @Override
     public List<Board> findByCondition(SearchCond condition) {
-        return null;
+        return boardMapper.findByCondition(condition);
     }
-
-
 }

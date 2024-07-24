@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="com.post.repository.mybatis.BoardMapper">
+    <select id="findByCondition" resultType="com.post.domain.board.Board" parameterType="com.post.api.board.request.SearchCond">
+        select *
+        from board
+        <where>
+            <if test="title != null">
+                and title like concat('%', #{title}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>
