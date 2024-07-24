@@ -6,14 +6,12 @@ import com.post.domain.member.Role;
 import com.post.exception.NotFoundMemberException;
 import com.post.exception.ParameterException;
 import jakarta.persistence.EntityManager;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -24,6 +22,7 @@ import static com.post.domain.member.Role.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -36,6 +35,7 @@ class MemberRepositoryImplTest {
     EntityManager em;
 
     @Test
+    @Order(1)
     @DisplayName("회원을 저장하면 저장된 회원의 정보가 반환된다")
     void saveMember() {
         // given
@@ -49,6 +49,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(2)
     @DisplayName("저장한 회원과 조회한 회원의 정보는 같아야한다")
     void findById() {
         // given
@@ -63,6 +64,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(3)
     @DisplayName("저장된 회원이 3명일 경우 List의 size는 3이어야한다.")
     void findMemberList() {
         // given
@@ -90,12 +92,17 @@ class MemberRepositoryImplTest {
 
         //when
         List<Member> memberList = memberRepository.findMemberList();
+        for (Member member : memberList) {
+            System.out.println(member.getName());
+
+        }
 
         //then
         assertThat(memberList).hasSize(3);
     }
 
     @Test
+    @Order(4)
     @DisplayName("조회하고자하는 id의 회원이 없으면 NotFoundMemberException 예외가 발생한다")
     void findByIdWithNonExistId() {
         // given
@@ -111,6 +118,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(5)
     @DisplayName("저장한 회원과 name필드를 통해 조회한 회원의 정보는 같아야한다")
     void findByName() {
         // given
@@ -125,6 +133,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(6)
     @DisplayName("조회하고자하는 이름의 회원이 없으면 EmptyResultDataAccessException 예외가 발생한다")
     void findByNameWithNonExistName() {
         // given
@@ -142,6 +151,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(7)
     @DisplayName("삭제된 회원에 대한 조회시 조회에 실패해야한다.")
     void delete() {
         // given
@@ -159,6 +169,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(8)
     @DisplayName("중복되는 이메일로 회원가입시 TRUE를 반환한다")
     void isExistEmail() {
         // given
@@ -173,6 +184,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(9)
     @DisplayName("중복되는 아이디로 회원가입시 TRUE를 반환한다")
     void isExistLoginId() {
         // given
@@ -187,6 +199,7 @@ class MemberRepositoryImplTest {
     }
 
     @Test
+    @Order(10)
     @DisplayName("중복되는 name 또는 loginId로 조회시 TRUE를 반환한다")
     void isDuplicateName() {
         // given

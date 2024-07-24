@@ -5,6 +5,7 @@ import com.post.domain.member.Member;
 import com.post.domain.member.Role;
 import com.post.repository.member.MemberRepositoryImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
+@Profile("!test")
 public class DataInitializer {
 
     private final MemberRepositoryImpl memberRepository;
