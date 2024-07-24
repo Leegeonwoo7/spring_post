@@ -23,4 +23,5 @@ mybatis:
 
 logging:
   level:
-    com.com.post.repository.mybatis: trace
+    com.post.repository.mybatis: DEBUG
+

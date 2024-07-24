@@ -22,7 +22,8 @@ mybatis:
   type-aliases-package: com.post.domain
   configuration:
     map-underscore-to-camel-case: true
+  mapper-locations: classpath:com/post/repository/mybatis/*.xml
 
 logging:
   level:
-    com.com.post.repository.mybatis: trace
+    com.post.repository.mybatis: DEBUG
