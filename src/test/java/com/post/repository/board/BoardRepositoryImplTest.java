@@ -3,11 +3,16 @@ package com.post.repository.board;
 import com.post.api.board.request.SearchCond;
 import com.post.domain.board.Board;
 import com.post.domain.member.Member;
+import com.post.exception.board.NotFoundBoardException;
+import com.post.repository.member.MemberRepository;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.lang.model.UnknownEntityException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -19,6 +24,12 @@ class BoardRepositoryImplTest {
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
+    EntityManager em;
 
     private Member memberA;
     private Member memberB;
@@ -99,6 +110,7 @@ class BoardRepositoryImplTest {
     }
 
     @Test
+    @Order(4)
     @DisplayName("게시글 제목으로 조회할 때 여러건을 조회할 수 있어야한다")
     void findByConditionMultiple() {
         // given
@@ -129,5 +141,53 @@ class BoardRepositoryImplTest {
         assertThat(boardList).hasSize(4);
         boardList.forEach(board -> assertThat(board.getTitle()).contains("게시글"));
     }
+
+    @Test
+    @Order(5)
+    @DisplayName("게시글을 변경하면 업데이트된 게시글이 반영된다")
+    void updateBoard() {
+        // given
+        Board saveBoardA = boardRepository.save(boardA);
+        Board saveBoardB = boardRepository.save(boardB);
+
+        Board newBoardA = Board.builder()
+                .title("새로운 게시글 A")
+                .content("새로운 게시글의 내용 A")
+                .build();
+
+        Board newBoardB = Board.builder()
+                .title("새로운 게시글 B")
+                .content("새로운 게시글의 내용 B")
+                .build();
+
+        //when
+        Board updateBoardA = boardRepository.update(saveBoardA.getId(), newBoardA);
+        Board updateBoardB = boardRepository.update(saveBoardB.getId(), newBoardB);
+
+        Board findBoardA = boardRepository.findById(updateBoardA.getId());
+        Board findBoardB = boardRepository.findById(updateBoardB.getId());
+
+        //then
+        assertThat(newBoardA.getTitle()).isEqualTo(findBoardA.getTitle());
+        assertThat(newBoardB.getTitle()).isEqualTo(findBoardB.getTitle());
+        assertThat(newBoardA.getContent()).isEqualTo(findBoardA.getContent());
+        assertThat(newBoardB.getContent()).isEqualTo(findBoardB.getContent());
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("게시글을 삭제하면 해당 게시글은 id로 조회되어서는 안된다")
+    void delete() {
+        //given
+        Board saveBoard = boardRepository.save(boardA);
+
+        //when
+        boardRepository.delete(saveBoard.getId());
+
+        //then
+        assertThatThrownBy(() -> boardRepository.findById(saveBoard.getId()))
+                .isInstanceOf(NotFoundBoardException.class);
+    }
+
 
 }
