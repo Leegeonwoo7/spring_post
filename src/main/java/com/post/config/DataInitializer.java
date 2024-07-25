@@ -1,8 +1,11 @@
 package com.post.config;
 
+import com.post.domain.board.Board;
 import com.post.domain.member.Address;
 import com.post.domain.member.Member;
 import com.post.domain.member.Role;
+import com.post.repository.board.BoardRepository;
+import com.post.repository.board.BoardRepositoryImpl;
 import com.post.repository.member.MemberRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
@@ -20,6 +23,7 @@ import java.time.LocalDateTime;
 public class DataInitializer {
 
     private final MemberRepositoryImpl memberRepository;
+    private final BoardRepositoryImpl boardRepository;
 
     @EventListener
     @Transactional
@@ -54,5 +58,34 @@ public class DataInitializer {
 
         memberRepository.save(member1);
         memberRepository.save(member2);
+
+        Board board1 = Board.builder()
+                .title("First Post")
+                .content("This is the first post.")
+                .member(member1)
+                .build();
+
+        Board board2 = Board.builder()
+                .title("Second Post")
+                .content("This is the second post.")
+                .member(member1)
+                .build();
+
+        Board board3 = Board.builder()
+                .title("Third Post")
+                .content("This is the third post.")
+                .member(member2)
+                .build();
+
+        Board board4 = Board.builder()
+                .title("Fourth Post")
+                .content("This is the fourth post.")
+                .member(member2)
+                .build();
+
+        boardRepository.save(board1);
+        boardRepository.save(board2);
+        boardRepository.save(board3);
+        boardRepository.save(board4);
     }
 }
