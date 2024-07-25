@@ -114,6 +114,8 @@ class BoardServiceTest {
     }
 
     @Test
+    @Order(4)
+    @Transactional
     @DisplayName("게시글을 수정하면 수정한 게시글이 반영된다")
     void editBoard() {
         // given
@@ -137,5 +139,37 @@ class BoardServiceTest {
         assertThat(editBoard.getContent()).isEqualTo(newBoard.getContent());
         assertThat(editBoard.getTitle()).isEqualTo(newBoard.getTitle());
         assertThat(editBoard.getId()).isEqualTo(saveBoard.getId());
+    }
+
+    @Test
+    @Order(5)
+    @Transactional
+    @DisplayName("저장되어있는 모든 게시글을 조회한다 (3건)")
+    void findAll() {
+        // given
+        CreateBoardRequest boardRequestA = CreateBoardRequest.builder()
+                .title("게시글 A")
+                .content("안녕하세요")
+                .build();
+
+        CreateBoardRequest boardRequestB = CreateBoardRequest.builder()
+                .title("게B시글")
+                .content("안녕하세요2")
+                .build();
+
+        CreateBoardRequest boardRequestC = CreateBoardRequest.builder()
+                .title("C게시글 ")
+                .content("안녕하세요3")
+                .build();
+
+        boardService.createBoard(boardRequestA);
+        boardService.createBoard(boardRequestB);
+        boardService.createBoard(boardRequestC);
+
+        //when
+        List<BoardResponse> findAll = boardService.findAllBoard();
+
+        //then
+        assertThat(findAll).hasSize(3);
     }
 }
