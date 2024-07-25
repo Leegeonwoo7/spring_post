@@ -7,6 +7,7 @@ import lombok.Getter;
 @Builder
 public class UpdateBoardRequest {
 
+    private Long id;
     private String title;
     private String content;
 }
