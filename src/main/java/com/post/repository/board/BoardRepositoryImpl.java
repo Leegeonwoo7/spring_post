@@ -34,6 +34,13 @@ public class BoardRepositoryImpl implements BoardRepository{
     }
 
     @Override
+    public List<Board> findAll() {
+        String jpql = "select b from Board b";
+        return em.createQuery(jpql, Board.class)
+                .getResultList();
+    }
+
+    @Override
     public void delete(Long id) {
         Board board = em.find(Board.class, id);
         em.remove(board);

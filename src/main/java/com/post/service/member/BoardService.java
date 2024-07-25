@@ -59,4 +59,12 @@ public class BoardService {
 
         return BoardResponse.from(updateBoard);
     }
+
+    @Transactional(readOnly = true)
+    public List<BoardResponse> findAllBoard() {
+        List<Board> boardList = boardRepository.findAll();
+        return boardList.stream()
+                .map(BoardResponse::from)
+                .collect(Collectors.toList());
+    }
 }
