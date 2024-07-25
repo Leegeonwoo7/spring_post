@@ -4,12 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class SearchCond {
+@Builder
+public class UpdateBoardRequest {
 
     private String title;
-
-    @Builder
-    public SearchCond(String title) {
-        this.title = title;
-    }
+    private String content;
 }
