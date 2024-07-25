@@ -5,7 +5,9 @@ import com.post.api.board.request.SearchCond;
 import com.post.api.board.request.UpdateBoardRequest;
 import com.post.api.board.response.BoardResponse;
 import com.post.domain.board.Board;
+import com.post.domain.member.Member;
 import com.post.repository.board.BoardRepository;
+import com.post.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,16 @@ import java.util.stream.Collectors;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public BoardResponse createBoard(CreateBoardRequest boardRequest) {
+        Member findMember = memberRepository.findById(boardRequest.getMemberId());
+
         Board createBoard = Board.builder()
                 .title(boardRequest.getTitle())
                 .content(boardRequest.getContent())
-                .member(boardRequest.getMember())
+                .member(findMember)
                 .build();
 
         Board saveBoard = boardRepository.save(createBoard);
