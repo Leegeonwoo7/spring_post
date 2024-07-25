@@ -37,4 +37,10 @@ public class Board {
     public void assignMember(Member member){
         this.member = member;
     }
+
+    public Board changeBoard(Board newBoard) {
+        this.title = newBoard.getTitle();
+        this.content = newBoard.getContent();
+        return this;
+    }
 }

@@ -13,4 +13,7 @@ public interface BoardRepository {
 
     Board findById(Long id);
 
+    void delete(Long id);
+
+    Board update(Long id, Board board);
 }
