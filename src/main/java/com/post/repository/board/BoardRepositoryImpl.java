@@ -7,10 +7,12 @@ import com.post.exception.board.NotFoundBoardException;
 import com.post.repository.mybatis.BoardMapper;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class BoardRepositoryImpl implements BoardRepository{
@@ -54,6 +56,10 @@ public class BoardRepositoryImpl implements BoardRepository{
 
     @Override
     public List<Board> findByCondition(SearchCond condition) {
-        return boardMapper.findByCondition(condition);
+        List<Board> boardList = boardMapper.findByCondition(condition);
+        for (Board board : boardList) {
+            log.info("Condition Search - title: {}, id: {}, member: {}", board.getTitle(), board.getId(), board.getMember());
+        }
+        return boardList;
     }
 }
