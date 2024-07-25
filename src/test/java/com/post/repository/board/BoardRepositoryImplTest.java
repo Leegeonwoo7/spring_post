@@ -96,6 +96,8 @@ class BoardRepositoryImplTest {
     @DisplayName("게시글 제목으로 글 단건 조회")
     void findByCondition() {
         //given
+        memberRepository.save(memberA);
+
         boardRepository.save(boardA);
 
         SearchCond cond = SearchCond.builder()
@@ -114,6 +116,9 @@ class BoardRepositoryImplTest {
     @DisplayName("게시글 제목으로 조회할 때 여러건을 조회할 수 있어야한다")
     void findByConditionMultiple() {
         // given
+        memberRepository.save(memberA);
+        memberRepository.save(memberB);
+
         Board boardC = Board.builder()
                 .member(memberA)
                 .content("이 글은 게시글 C입니다.")

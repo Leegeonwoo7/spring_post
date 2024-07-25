@@ -45,7 +45,7 @@ class BoardServiceTest {
         CreateBoardRequest boardRequest = CreateBoardRequest.builder()
                 .title("게시글 A")
                 .content("안녕하세요")
-                .member(memberA)
+                .memberId(memberA.getId())
                 .build();
 
         //when
@@ -62,9 +62,16 @@ class BoardServiceTest {
     @DisplayName("저장된 게시글의 ID값으로 게시글을 조회한다")
     void searchBoardById() {
         // given
+        Member memberA = Member.builder()
+                .loginId("memberA")
+                .password("password")
+                .build();
+        memberRepository.save(memberA);
+
         CreateBoardRequest boardRequest = CreateBoardRequest.builder()
                 .title("게시글 A")
                 .content("안녕하세요")
+                .memberId(memberA.getId())
                 .build();
 
         BoardResponse boardResponse = boardService.createBoard(boardRequest);
@@ -86,19 +93,28 @@ class BoardServiceTest {
     @DisplayName("글 제목으로 검색시에 조건에 맞는 게시글만 검색된다 (2건)")
     void searchBoardByCondition() {
         // given
+        Member memberA = Member.builder()
+                .loginId("memberA")
+                .password("password")
+                .build();
+        memberRepository.save(memberA);
+
         CreateBoardRequest boardRequestA = CreateBoardRequest.builder()
                 .title("게시글 A")
                 .content("안녕하세요")
+                .memberId(memberA.getId())
                 .build();
 
         CreateBoardRequest boardRequestB = CreateBoardRequest.builder()
                 .title("게B시글")
                 .content("안녕하세요2")
+                .memberId(memberA.getId())
                 .build();
 
         CreateBoardRequest boardRequestC = CreateBoardRequest.builder()
                 .title("C게시글 ")
                 .content("안녕하세요3")
+                .memberId(memberA.getId())
                 .build();
 
         boardService.createBoard(boardRequestA);
@@ -111,6 +127,7 @@ class BoardServiceTest {
 
         //then
         assertThat(resultList).hasSize(2);
+        resultList.forEach(board -> assertThat(board.getTitle()).contains("게시글"));
     }
 
     @Test
@@ -119,9 +136,16 @@ class BoardServiceTest {
     @DisplayName("게시글을 수정하면 수정한 게시글이 반영된다")
     void editBoard() {
         // given
+        Member memberA = Member.builder()
+                .loginId("memberA")
+                .password("password")
+                .build();
+        memberRepository.save(memberA);
+
         CreateBoardRequest oldBoard = CreateBoardRequest.builder()
                 .title("게시글 A")
                 .content("안녕하세요")
+                .memberId(memberA.getId())
                 .build();
         BoardResponse saveBoard = boardService.createBoard(oldBoard);
         BoardResponse findBoard = boardService.searchBoardById(saveBoard.getId());
@@ -147,19 +171,28 @@ class BoardServiceTest {
     @DisplayName("저장되어있는 모든 게시글을 조회한다 (3건)")
     void findAll() {
         // given
+        Member memberA = Member.builder()
+                .loginId("memberA")
+                .password("password")
+                .build();
+        memberRepository.save(memberA);
+
         CreateBoardRequest boardRequestA = CreateBoardRequest.builder()
                 .title("게시글 A")
                 .content("안녕하세요")
+                .memberId(memberA.getId())
                 .build();
 
         CreateBoardRequest boardRequestB = CreateBoardRequest.builder()
                 .title("게B시글")
                 .content("안녕하세요2")
+                .memberId(memberA.getId())
                 .build();
 
         CreateBoardRequest boardRequestC = CreateBoardRequest.builder()
                 .title("C게시글 ")
                 .content("안녕하세요3")
+                .memberId(memberA.getId())
                 .build();
 
         boardService.createBoard(boardRequestA);
