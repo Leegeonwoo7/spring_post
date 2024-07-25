@@ -3,13 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="com.post.repository.mybatis.BoardMapper">
-    <select id="findByCondition" resultType="com.post.domain.board.Board" parameterType="com.post.api.board.request.SearchCond">
-        select *
-        from board
-        <where>
-            <if test="title != null">
-                and title like concat('%', #{title}, '%')
-            </if>
-        </where>
+    <resultMap id="BoardResultMap" type="com.post.domain.board.Board">
+        <id property="id" column="board_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <association property="member" javaType="com.post.domain.member.Member">
+            <id property="id" column="member_id"/>
+            <result property="loginId" column="login_id"/>
+            <result property="password" column="password"/>
+            <result property="name" column="name"/>
+            <result property="email" column="email"/>
+            <result property="address.city" column="city"/>
+            <result property="address.street" column="street"/>
+            <result property="address.zipcode" column="zipcode"/>
+            <result property="birthdate" column="birthdate"/>
+            <result property="phone" column="phone"/>
+            <result property="role" column="role"/>
+            <result property="createAt" column="create_at"/>
+        </association>
+    </resultMap>
+
+    <select id="findByCondition" resultMap="BoardResultMap">
+        select b.board_id, b.title, b.content,
+               m.member_id, m.login_id, m.password, m.name, m.email, m.city, m.street, m.zipcode, m.birthdate, m.phone, m.role, m.create_at
+        from board b
+        join member m on b.member_id = m.member_id
+        where b.title like concat('%', #{title}, '%')
     </select>
 </mapper>
