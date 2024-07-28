@@ -1,10 +1,8 @@
-package com.post.repository.board;
+package com.post.app.repository.board;
 
-import com.post.api.board.request.SearchCond;
-import com.post.domain.board.Board;
-import com.post.domain.member.Member;
-import com.post.exception.board.NotFoundBoardException;
-import com.post.repository.mybatis.BoardMapper;
+import com.post.app.api.board.request.SearchCond;
+import com.post.app.domain.board.Board;
+import com.post.app.exception.board.NotFoundBoardException;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

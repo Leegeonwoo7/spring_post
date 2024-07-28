@@ -1,7 +1,7 @@
-package com.post.repository.board;
+package com.post.app.repository.board;
 
-import com.post.api.board.request.SearchCond;
-import com.post.domain.board.Board;
+import com.post.app.api.board.request.SearchCond;
+import com.post.app.domain.board.Board;
 
 import java.util.List;
 

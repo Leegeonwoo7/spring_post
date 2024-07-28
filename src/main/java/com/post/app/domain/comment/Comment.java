@@ -1,7 +1,7 @@
-package com.post.domain.comment;
+package com.post.app.domain.comment;
 
-import com.post.domain.board.Board;
-import com.post.domain.member.Member;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 

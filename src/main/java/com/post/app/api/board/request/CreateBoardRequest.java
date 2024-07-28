@@ -1,6 +1,5 @@
-package com.post.api.board.request;
+package com.post.app.api.board.request;
 
-import com.post.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 

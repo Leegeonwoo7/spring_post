@@ -1,4 +1,4 @@
-package com.post.service.member;
+package com.post.service;
 
 import com.post.app.api.member.request.MemberCreateRequest;
 import com.post.app.api.member.response.MemberResponse;

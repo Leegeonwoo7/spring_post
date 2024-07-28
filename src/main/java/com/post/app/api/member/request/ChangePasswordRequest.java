@@ -1,4 +1,4 @@
-package com.post.api.member.request;
+package com.post.app.api.member.request;
 
 import lombok.Getter;
 

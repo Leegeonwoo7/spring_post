@@ -1,4 +1,4 @@
-package com.post.repository.board;
+package com.post.repository;
 
 import com.post.app.api.board.request.SearchCond;
 import com.post.app.repository.board.BoardRepository;

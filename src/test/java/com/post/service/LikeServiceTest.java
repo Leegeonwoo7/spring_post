@@ -1,4 +1,4 @@
-package com.post.service.like;
+package com.post.service;
 
 import com.post.app.api.like.request.LikeRequest;
 import com.post.app.api.like.response.MembersWithLikeResponse;

@@ -1,4 +1,4 @@
-package com.post.exception;
+package com.post.app.exception;
 
 public class ExistMemberEmailException extends RuntimeException {
     public ExistMemberEmailException(String message) {

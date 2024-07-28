@@ -1,4 +1,4 @@
-package com.post.api.like.request;
+package com.post.app.api.like.request;
 
 import lombok.Builder;
 import lombok.Getter;

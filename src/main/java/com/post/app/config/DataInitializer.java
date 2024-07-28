@@ -1,12 +1,11 @@
-package com.post.config;
+package com.post.app.config;
 
-import com.post.domain.board.Board;
-import com.post.domain.member.Address;
-import com.post.domain.member.Member;
-import com.post.domain.member.Role;
-import com.post.repository.board.BoardRepository;
-import com.post.repository.board.BoardRepositoryImpl;
-import com.post.repository.member.MemberRepositoryImpl;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.member.Address;
+import com.post.app.domain.member.Member;
+import com.post.app.domain.member.Role;
+import com.post.app.repository.board.BoardRepositoryImpl;
+import com.post.app.repository.member.MemberRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;

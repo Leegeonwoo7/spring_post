@@ -1,9 +1,12 @@
-package com.post.api.like.response;
+package com.post.app.api.like.response;
 
-import com.post.domain.member.Member;
+import com.post.app.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * 게시글에 좋아요를 누른 회원이름 조회
+ */
 @Getter
 public class MembersWithLikeResponse {
 

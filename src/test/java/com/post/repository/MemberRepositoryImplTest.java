@@ -1,4 +1,4 @@
-package com.post.repository.member;
+package com.post.repository;
 
 import com.post.app.repository.member.MemberRepository;
 import com.post.app.domain.member.Address;

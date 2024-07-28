@@ -1,4 +1,4 @@
-package com.post.domain.member;
+package com.post.app.domain.member;
 
 import jakarta.persistence.*;
 import lombok.Builder;

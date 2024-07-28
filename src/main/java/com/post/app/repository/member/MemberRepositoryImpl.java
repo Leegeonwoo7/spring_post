@@ -1,8 +1,7 @@
-package com.post.repository.member;
+package com.post.app.repository.member;
 
-import com.post.domain.member.Member;
-import com.post.exception.ExistMemberEmailException;
-import com.post.exception.NotFoundMemberException;
+import com.post.app.domain.member.Member;
+import com.post.app.exception.NotFoundMemberException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;

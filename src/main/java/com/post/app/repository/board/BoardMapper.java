@@ -1,4 +1,4 @@
-package com.post.app.repository.mybatis;
+package com.post.app.repository.board;
 
 import com.post.app.api.board.request.SearchCond;
 import com.post.app.domain.board.Board;

@@ -1,6 +1,6 @@
-package com.post.domain.board;
+package com.post.app.domain.board;
 
-import com.post.domain.member.Member;
+import com.post.app.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,11 +17,11 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
-//    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false)
     private String title;
 
     @Lob
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne

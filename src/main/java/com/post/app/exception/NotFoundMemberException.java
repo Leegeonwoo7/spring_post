@@ -1,4 +1,4 @@
-package com.post.exception;
+package com.post.app.exception;
 
 public class NotFoundMemberException extends RuntimeException{
     public NotFoundMemberException(String message) {

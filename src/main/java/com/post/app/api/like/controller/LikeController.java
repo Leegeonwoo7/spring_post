@@ -1,10 +1,9 @@
-package com.post.api.like.controller;
+package com.post.app.api.like.controller;
 
-import com.post.api.like.request.LikeRequest;
-import com.post.api.like.response.LikeResponse;
-import com.post.api.like.response.MembersWithLikeResponse;
-import com.post.domain.like.Likes;
-import com.post.service.like.LikeService;
+import com.post.app.api.like.request.LikeRequest;
+import com.post.app.api.like.response.MembersWithLikeResponse;
+import com.post.app.domain.like.Likes;
+import com.post.app.service.LikeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,8 @@
-package com.post.domain.like;
+package com.post.app.domain.like;
 
-import com.post.domain.board.Board;
-import com.post.domain.member.Member;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.member.Member;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
-package com.post.repository.likes;
+package com.post.app.repository.likes;
 
-import com.post.domain.like.Likes;
-import com.post.domain.member.Member;
+import com.post.app.domain.like.Likes;
+import com.post.app.domain.member.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

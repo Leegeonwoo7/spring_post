@@ -1,6 +1,6 @@
-package com.post.api.like.response;
+package com.post.app.api.like.response;
 
-import com.post.domain.like.Likes;
+import com.post.app.domain.like.Likes;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

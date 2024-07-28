@@ -1,8 +1,8 @@
-package com.post.api.member.response;
+package com.post.app.api.member.response;
 
-import com.post.domain.member.Address;
-import com.post.domain.member.Member;
-import com.post.domain.member.Role;
+import com.post.app.domain.member.Address;
+import com.post.app.domain.member.Member;
+import com.post.app.domain.member.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

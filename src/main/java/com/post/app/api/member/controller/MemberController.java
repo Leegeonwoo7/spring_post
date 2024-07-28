@@ -1,9 +1,9 @@
-package com.post.api.member.controller;
+package com.post.app.api.member.controller;
 
-import com.post.api.member.request.ChangePasswordRequest;
-import com.post.api.member.request.MemberCreateRequest;
-import com.post.api.member.response.MemberResponse;
-import com.post.service.member.MemberService;
+import com.post.app.api.member.request.ChangePasswordRequest;
+import com.post.app.api.member.request.MemberCreateRequest;
+import com.post.app.api.member.response.MemberResponse;
+import com.post.app.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

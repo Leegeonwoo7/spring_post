@@ -1,4 +1,4 @@
-package com.post.repository.likes;
+package com.post.repository;
 
 import com.post.app.repository.likes.LikeRepository;
 import com.post.app.domain.board.Board;

@@ -19,10 +19,10 @@ spring:
 
 #MyBatis
 mybatis:
-  type-aliases-package: com.post.domain
+  type-aliases-package: com.post.app.domain
   configuration:
     map-underscore-to-camel-case: true
-  mapper-locations: classpath:com/post/repository/mybatis/*.xml
+  mapper-locations: classpath:com/post/app/repository/mybatis/*.xml
 
 logging:
   level:

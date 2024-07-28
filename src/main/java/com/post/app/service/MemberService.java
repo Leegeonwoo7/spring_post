@@ -1,13 +1,13 @@
-package com.post.service.member;
+package com.post.app.service;
 
-import com.post.api.member.request.MemberCreateRequest;
-import com.post.api.member.response.MemberResponse;
-import com.post.domain.member.Member;
-import com.post.exception.ExistMemberEmailException;
-import com.post.exception.ExistMemberLoginIdException;
-import com.post.exception.ExistMemberNameException;
-import com.post.exception.ParameterException;
-import com.post.repository.member.MemberRepository;
+import com.post.app.api.member.request.MemberCreateRequest;
+import com.post.app.api.member.response.MemberResponse;
+import com.post.app.domain.member.Member;
+import com.post.app.exception.ExistMemberEmailException;
+import com.post.app.exception.ExistMemberLoginIdException;
+import com.post.app.exception.ExistMemberNameException;
+import com.post.app.exception.ParameterException;
+import com.post.app.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

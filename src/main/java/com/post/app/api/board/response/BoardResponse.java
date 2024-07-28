@@ -1,12 +1,10 @@
-package com.post.api.board.response;
+package com.post.app.api.board.response;
 
-import com.post.domain.board.Board;
-import com.post.domain.member.Member;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-
-import java.util.Objects;
 
 @Getter
 @AllArgsConstructor

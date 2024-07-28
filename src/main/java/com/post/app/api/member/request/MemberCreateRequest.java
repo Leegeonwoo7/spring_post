@@ -1,7 +1,7 @@
-package com.post.api.member.request;
+package com.post.app.api.member.request;
 
-import com.post.domain.member.Address;
-import com.post.domain.member.Role;
+import com.post.app.domain.member.Address;
+import com.post.app.domain.member.Role;
 import lombok.Builder;
 import lombok.Getter;
 
