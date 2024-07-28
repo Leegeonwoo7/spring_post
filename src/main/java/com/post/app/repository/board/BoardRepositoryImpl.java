@@ -1,6 +1,6 @@
 package com.post.app.repository.board;
 
-import com.post.app.api.board.request.SearchCond;
+import com.post.app.common.SearchCond;
 import com.post.app.domain.board.Board;
 import com.post.app.exception.board.NotFoundBoardException;
 import jakarta.persistence.EntityManager;

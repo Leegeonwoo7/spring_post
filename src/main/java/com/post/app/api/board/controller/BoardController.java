@@ -1,9 +1,9 @@
 package com.post.app.api.board.controller;
 
 import com.post.app.api.board.request.CreateBoardRequest;
-import com.post.app.api.board.request.SearchCond;
 import com.post.app.api.board.request.UpdateBoardRequest;
 import com.post.app.api.board.response.BoardResponse;
+import com.post.app.common.SearchCond;
 import com.post.app.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

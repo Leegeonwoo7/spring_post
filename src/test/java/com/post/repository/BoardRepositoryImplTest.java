@@ -1,6 +1,6 @@
 package com.post.repository;
 
-import com.post.app.api.board.request.SearchCond;
+import com.post.app.common.SearchCond;
 import com.post.app.repository.board.BoardRepository;
 import com.post.app.domain.board.Board;
 import com.post.app.domain.member.Member;
