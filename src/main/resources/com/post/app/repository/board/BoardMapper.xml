@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace ="com.post.repository.mybatis.BoardMapper">
-    <resultMap id="BoardResultMap" type="com.post.domain.board.Board">
+<mapper namespace ="com.post.app.repository.board.BoardMapper">
+    <resultMap id="BoardResultMap" type="com.post.app.domain.board.Board">
         <id property="id" column="board_id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
-        <association property="member" javaType="com.post.domain.member.Member">
+        <association property="member" javaType="com.post.app.domain.member.Member">
             <id property="id" column="member_id"/>
             <result property="loginId" column="login_id"/>
             <result property="password" column="password"/>

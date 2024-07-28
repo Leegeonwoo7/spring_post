@@ -1,10 +1,11 @@
 package com.post.repository.likes;
 
-import com.post.domain.board.Board;
-import com.post.domain.like.Likes;
-import com.post.domain.member.Member;
-import com.post.repository.board.BoardRepository;
-import com.post.repository.member.MemberRepository;
+import com.post.app.repository.likes.LikeRepository;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.like.Likes;
+import com.post.app.domain.member.Member;
+import com.post.app.repository.board.BoardRepository;
+import com.post.app.repository.member.MemberRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,8 @@ import static org.assertj.core.api.Assertions.*;
 @Transactional
 class LikeRepositoryImplTest {
 
-    @Autowired LikeRepository likeRepository;
+    @Autowired
+    LikeRepository likeRepository;
     @Autowired MemberRepository memberRepository;
     @Autowired BoardRepository boardRepository;
     @Autowired EntityManager em;

@@ -1,12 +1,13 @@
 package com.post.service.like;
 
-import com.post.api.like.request.LikeRequest;
-import com.post.api.like.response.MembersWithLikeResponse;
-import com.post.domain.board.Board;
-import com.post.domain.like.Likes;
-import com.post.domain.member.Member;
-import com.post.repository.board.BoardRepository;
-import com.post.repository.member.MemberRepository;
+import com.post.app.api.like.request.LikeRequest;
+import com.post.app.api.like.response.MembersWithLikeResponse;
+import com.post.app.service.LikeService;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.like.Likes;
+import com.post.app.domain.member.Member;
+import com.post.app.repository.board.BoardRepository;
+import com.post.app.repository.member.MemberRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -22,7 +22,8 @@ import static org.assertj.core.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class LikeServiceTest {
 
-    @Autowired LikeService likeService;
+    @Autowired
+    LikeService likeService;
     @Autowired MemberRepository memberRepository;
     @Autowired BoardRepository boardRepository;
 

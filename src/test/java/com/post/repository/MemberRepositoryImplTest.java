@@ -1,15 +1,13 @@
 package com.post.repository.member;
 
-import com.post.domain.member.Address;
-import com.post.domain.member.Member;
-import com.post.domain.member.Role;
-import com.post.exception.NotFoundMemberException;
-import com.post.exception.ParameterException;
+import com.post.app.repository.member.MemberRepository;
+import com.post.app.domain.member.Address;
+import com.post.app.domain.member.Member;
+import com.post.app.exception.NotFoundMemberException;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.post.domain.member.Role.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.post.app.domain.member.Role.USER;
 import static org.assertj.core.api.Assertions.*;
 
 @ActiveProfiles("test")

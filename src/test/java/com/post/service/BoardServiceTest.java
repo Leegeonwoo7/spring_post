@@ -1,12 +1,12 @@
 package com.post.service.member;
 
-import com.post.api.board.request.CreateBoardRequest;
-import com.post.api.board.request.SearchCond;
-import com.post.api.board.request.UpdateBoardRequest;
-import com.post.api.board.response.BoardResponse;
-import com.post.domain.board.Board;
-import com.post.domain.member.Member;
-import com.post.repository.member.MemberRepository;
+import com.post.app.api.board.request.CreateBoardRequest;
+import com.post.app.api.board.request.SearchCond;
+import com.post.app.api.board.request.UpdateBoardRequest;
+import com.post.app.api.board.response.BoardResponse;
+import com.post.app.service.BoardService;
+import com.post.app.domain.member.Member;
+import com.post.app.repository.member.MemberRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.MethodOrderer.*;
 

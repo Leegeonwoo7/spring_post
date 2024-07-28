@@ -1,18 +1,17 @@
 package com.post.repository.board;
 
-import com.post.api.board.request.SearchCond;
-import com.post.domain.board.Board;
-import com.post.domain.member.Member;
-import com.post.exception.board.NotFoundBoardException;
-import com.post.repository.member.MemberRepository;
+import com.post.app.api.board.request.SearchCond;
+import com.post.app.repository.board.BoardRepository;
+import com.post.app.domain.board.Board;
+import com.post.app.domain.member.Member;
+import com.post.app.exception.board.NotFoundBoardException;
+import com.post.app.repository.member.MemberRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.lang.model.UnknownEntityException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;

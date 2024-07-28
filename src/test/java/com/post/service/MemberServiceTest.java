@@ -1,12 +1,12 @@
 package com.post.service.member;
 
-import com.post.api.member.request.MemberCreateRequest;
-import com.post.api.member.response.MemberResponse;
-import com.post.domain.member.Address;
-import com.post.domain.member.Member;
-import com.post.exception.ExistMemberEmailException;
-import com.post.exception.ExistMemberLoginIdException;
-import com.post.exception.ExistMemberNameException;
+import com.post.app.api.member.request.MemberCreateRequest;
+import com.post.app.api.member.response.MemberResponse;
+import com.post.app.service.MemberService;
+import com.post.app.domain.member.Address;
+import com.post.app.exception.ExistMemberEmailException;
+import com.post.app.exception.ExistMemberLoginIdException;
+import com.post.app.exception.ExistMemberNameException;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -18,9 +18,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.post.domain.member.Role.ADMIN;
-import static com.post.domain.member.Role.USER;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.post.app.domain.member.Role.ADMIN;
+import static com.post.app.domain.member.Role.USER;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
