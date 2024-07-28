@@ -1,6 +1,5 @@
-package com.post.api.board.request;
+package com.post.app.api.board.request;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
