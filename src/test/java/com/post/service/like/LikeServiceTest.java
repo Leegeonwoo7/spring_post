@@ -1,6 +1,7 @@
 package com.post.service.like;
 
 import com.post.api.like.request.LikeRequest;
+import com.post.api.like.response.MembersWithLikeResponse;
 import com.post.domain.board.Board;
 import com.post.domain.like.Likes;
 import com.post.domain.member.Member;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
@@ -110,5 +113,64 @@ class LikeServiceTest {
 
         //then
         assertThat(resultCount).isEqualTo(3L);
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("해당 게시글에 좋아요를 누른 회원이름을 조회한다")
+    void findMembersByLikeBoard() {
+        // given
+        Member ownerMember = Member.builder()
+                .loginId("owner")
+                .password("1234")
+                .build();
+        Member memberA = Member.builder()
+                .loginId("memberA")
+                .password("1234")
+                .build();
+        Member memberB = Member.builder()
+                .loginId("memberB")
+                .password("1234")
+                .build();
+        Member memberC = Member.builder()
+                .loginId("memberC")
+                .password("1234")
+                .build();
+        memberRepository.save(ownerMember);
+        memberRepository.save(memberA);
+        memberRepository.save(memberB);
+        memberRepository.save(memberC);
+
+        Board board = Board.builder()
+                .title("게시글 A")
+                .content("게시글입니다.")
+                .member(ownerMember)
+                .build();
+        Board saveBoard = boardRepository.save(board);
+
+        LikeRequest like1 = LikeRequest.builder()
+                .boardId(saveBoard.getId())
+                .memberId(memberA.getId())
+                .build();
+
+        LikeRequest like2 = LikeRequest.builder()
+                .boardId(saveBoard.getId())
+                .memberId(memberB.getId())
+                .build();
+        LikeRequest like3 = LikeRequest.builder()
+                .boardId(saveBoard.getId())
+                .memberId(memberC.getId())
+                .build();
+        likeService.addLike(like1);
+        likeService.addLike(like2);
+        likeService.addLike(like3);
+
+        //when
+        List<MembersWithLikeResponse> resultList = likeService.findMembersByLikeBoard(saveBoard.getId());
+
+        //then
+        assertThat(resultList).hasSize(3);
+        assertThat(resultList).extracting("memberId")
+                .containsExactlyInAnyOrder(memberA.getId(), memberB.getId(), memberC.getId());
     }
 }
