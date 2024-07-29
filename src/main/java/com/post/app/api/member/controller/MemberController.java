@@ -36,6 +36,7 @@ public class MemberController {
         return ResponseEntity.ok(memberResponse);
     }
 
+    //memberId도 dto로 묶을까?
     @PostMapping("/members/edit/{memberId}")
     public ResponseEntity<MemberResponse> editMember(@PathVariable Long memberId, @RequestBody ChangePasswordRequest request) {
         MemberResponse memberResponse = memberService.changePassword(memberId, request.getPassword());

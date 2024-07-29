@@ -24,4 +24,12 @@ public class BoardResponse {
                 board.getMember()
         );
     }
+
+    public Board toEntity(Member member) {
+        return Board.builder()
+                .title(this.title)
+                .content(this.content)
+                .member(member)
+                .build();
+    }
 }

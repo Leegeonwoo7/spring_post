@@ -40,6 +40,20 @@ public class MemberResponse {
         );
     }
 
+    public Member toEntity() {
+        return Member.builder()
+                .loginId(this.loginId)
+                .password(this.password)
+                .name(this.name)
+                .email(this.email)
+                .address(this.address)
+                .birthdate(this.birthdate)
+                .phone(this.phone)
+                .role(this.role)
+                .createAt(this.createAt)
+                .build();
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object)
