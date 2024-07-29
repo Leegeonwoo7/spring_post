@@ -17,7 +17,9 @@ public class CommentRepositoryImpl implements CommentRepository{
 
     @Override
     public Comment save(Comment comment) {
+        log.info("comment: {}, {}, {}", comment.getContent(), comment.getMember().getName(), comment.getBoard().getTitle());
         em.persist(comment);
+        log.info("test 12345");
         return comment;
     }
 
@@ -42,6 +44,7 @@ public class CommentRepositoryImpl implements CommentRepository{
 
     @Override
     public void delete(Long commentId) {
-        em.remove(commentId);
+        Comment comment = em.find(Comment.class, commentId);
+        em.remove(comment);
     }
 }

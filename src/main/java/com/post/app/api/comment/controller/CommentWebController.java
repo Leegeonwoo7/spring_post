@@ -45,7 +45,7 @@ public class CommentWebController {
     }
 
     @PostMapping("/comments/delete")
-    public ResponseEntity<Void> deleteComment(@RequestBody Long commentId) {
+    public ResponseEntity<Void> deleteComment(@RequestParam Long commentId) {
         commentService.deleteComment(commentId);
         return ResponseEntity.ok().build();
     }

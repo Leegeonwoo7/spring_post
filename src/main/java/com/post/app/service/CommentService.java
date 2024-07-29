@@ -23,26 +23,18 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final MemberService memberService;
-    private final BoardService boardService;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
     @Transactional
     public Comment createComment(CreateCommentRequest request) {
-        log.info("CommentService memberId: {}",request.getMemberId());
-        log.info("CommentService boardId: {}",request.getBoardId());
-        MemberResponse memberResponse = memberService.findMemberById(request.getMemberId());
-//        Member memberResponse = memberRepository.findById(request.getMemberId());
-        log.info("CommentService memberResponse: {}", memberResponse.getLoginId());
-        BoardResponse boardResponse = boardService.searchBoardById(request.getBoardId());
-        log.info("CommentService boardResponse.getMember: {}", boardResponse.getMember().getName());
-//        Board boardResponse = boardRepository.findById(request.getBoardId());
+        Member findMember = memberRepository.findById(request.getMemberId());
+        Board findBoard = boardRepository.findById(request.getBoardId());
 
         Comment comment = Comment.builder()
                 .content(request.getContent())
-                .member(memberResponse.toEntity())
-                .board(boardResponse.toEntity(boardResponse.getMember()))
+                .member(findMember)
+                .board(findBoard)
                 .createAt(LocalDateTime.now())
                 .build();
         log.info("CommentService comment.builder: {}, {}, {}, {}, {}", comment.getId(), comment.getMember().getName(), comment.getBoard().getTitle(), comment.getCreateAt(), comment.getContent());
@@ -67,6 +59,6 @@ public class CommentService {
 
     @Transactional
     public void deleteComment(Long commentId) {
-        deleteComment(commentId);
+        commentRepository.delete(commentId);
     }
 }
